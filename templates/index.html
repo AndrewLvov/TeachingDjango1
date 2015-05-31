@@ -1,0 +1,14 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+<body>
+<h1>Hello</h1>
+{% for i in numbers %}
+	<span>Number {{ forloop.counter }}: {{ i }}</span><br/>
+{% endfor %}
+Test: {{ numbers.3 }}
+<span>{{ message }}</span>
+<script src="{% static 'js/my.js' %}"></script>
+</body>
+</html>
