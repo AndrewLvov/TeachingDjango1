@@ -21,4 +21,7 @@ from .views import index
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', index),
+    url(r'^logout/$', 'django.contrib.auth.views.logout',
+        {'next_page': '/'}, name='logout'),
+    url('^', include('django.contrib.auth.urls')),
 ]

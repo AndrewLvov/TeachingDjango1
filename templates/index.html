@@ -6,23 +6,34 @@
 <link rel="stylesheet" href="maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
 <style>
     .message {
-        color: red
+        border: 1px solid red;
+        margin: 5px
     }
 </style>
 </head>
 <body>
+{% if user.is_authenticated %}
+    <a href="/logout/">Logout</a>
+{% else %}
+    <a href="/login/">Login</a>
+{% endif %}
 <h1>Hello</h1>
-<form method="POST" action="">
-    {% csrf_token %}
-	<div class="row">
-		<input type="text" name="text" placeholder="Enter message text">
-	</div>
-    <div class="row">
-        <input type="submit" value="Add message">
-    </div>
-</form>
+{% if user.is_authenticated %}
+    <form method="POST" action="">
+        {% csrf_token %}
+        <div class="row">
+            <input type="text" name="text" placeholder="Enter message text">
+        </div>
+        <div class="row">
+            <input type="submit" value="Add message">
+        </div>
+    </form>
+{% endif %}
 {% for msg in messages %}
-    <div class="row message">{{ msg.text }}</div>
+    <div class="message">
+        <div class="row">{{ msg.author }}</div>
+        <div class="row">{{ msg.text }}</div>
+    </div>
 {% endfor %}
 <script src="{% static 'js/my.js' %}"></script>
 </body>
